@@ -7,14 +7,22 @@ const $messageFormInput = $messageForm.querySelector('input')
 const $messageFormButton = $messageForm.querySelector('button')
 const $sendLocationButton = document.querySelector('#send-location')
 const $loadLocation = document.querySelector('#loading-location')
+const $messages = document.querySelector('#messages')
 
+// Templates
+const messageTemplate = document.querySelector('#message-template').innerHTML
 
 socket.on('welcome', (welcomeMessage) => {
     console.log(welcomeMessage)
 })
 
 socket.on('message', (message) => {
-    console.log(`${message}`)
+    console.log(message)
+    // the message-template in our html will render the message parameter we receive
+    const html = Mustache.render(messageTemplate, {
+        message
+    })
+    $messages.insertAdjacentHTML('beforeend', html)
 })
 
 $messageFormButton.addEventListener('click', (e) => {
