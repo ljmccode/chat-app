@@ -21,7 +21,7 @@ socket.on('message', (message) => {
     console.log(message)
     // the message-template in our html will render the message parameter we receive
     const html = Mustache.render(messageTemplate, {
-        message
+        message: message.text
     })
     $messages.insertAdjacentHTML('beforeend', html)
 })

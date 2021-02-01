@@ -3,6 +3,7 @@ const http = require('http')
 const path = require('path')
 const socketio = require('socket.io')
 const Filter = require('bad-words')
+const { generateMessage } =require('./utils/message')
 
 const app = express()
 // create server outside of express library so we have access to raw http server
@@ -15,11 +16,11 @@ const publicDirectoryPath = path.join(__dirname, '../public')
 app.use(express.json())
 app.use(express.static(publicDirectoryPath))
 
-io.on('connection', async (socket) => {
-    // emits event to that specific connection
-    await socket.emit('welcome', 'Welcome!')
+io.on('connection', (socket) => {
+    socket.emit('message', generateMessage('Welcome!'))
+    
     // sends to everybody but this particular socket
-    socket.broadcast.emit('message', 'A new user has joined')
+    socket.broadcast.emit('message', generateMessage('A new user has joined'))
      
     socket.on('sendMessage', (message, callback) => {
         const filter = new Filter()
@@ -28,7 +29,7 @@ io.on('connection', async (socket) => {
             return callback('Profanity is not allowed')
         }
         // emit the event to every single connection available
-        io.emit('message', message)
+        io.emit('message', generateMessage(message))
         // can send data back
         callback()
     })
@@ -39,7 +40,7 @@ io.on('connection', async (socket) => {
     })
 
     socket.on('disconnect', () => {
-        io.emit('message', 'A user has left!')
+        io.emit('message', generateMessage('A user has left!'))
     })
 })
 
