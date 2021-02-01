@@ -2,6 +2,7 @@ const express = require('express')
 const http = require('http')
 const path = require('path')
 const socketio = require('socket.io')
+const Filter = require('bad-words')
 
 const app = express()
 // create server outside of express library so we have access to raw http server
@@ -21,10 +22,15 @@ io.on('connection', async (socket) => {
     socket.broadcast.emit('message', 'A new user has joined')
      
     socket.on('sendMessage', (message, callback) => {
+        const filter = new Filter()
+
+        if (filter.isProfane(message)) {
+            return callback('Profanity is not allowed')
+        }
         // emit the event to every single connection available
         io.emit('message', message)
         // can send data back
-        callback('Delivered')
+        callback()
     })
 
     socket.on('sendLocation', (coords) => {

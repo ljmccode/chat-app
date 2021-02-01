@@ -11,8 +11,10 @@ socket.on('message', (message) => {
 document.querySelector('#send').addEventListener('click', (e) => {
     e.preventDefault()
     const message = document.getElementById('message').value
-    socket.emit('sendMessage', message, (message) => {
-        console.log('The message was delivered', message)
+    socket.emit('sendMessage', message, (error) => {
+        if (error) {
+            return console.log(error)
+        }
     })
 })
 
