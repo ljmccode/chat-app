@@ -19,9 +19,12 @@ io.on('connection', async (socket) => {
     await socket.emit('welcome', 'Welcome!')
     // sends to everybody but this particular socket
     socket.broadcast.emit('message', 'A new user has joined')
-    socket.on('sendMessage', (message) => {
+     
+    socket.on('sendMessage', (message, callback) => {
         // emit the event to every single connection available
         io.emit('message', message)
+        // can send data back
+        callback('Delivered')
     })
 
     socket.on('sendLocation', (coords) => {
