@@ -1,5 +1,11 @@
 const socket = io()
 
+// Elements
+// $ let's you know its an element from the DOM selected
+const $messageForm = document.querySelector('#message-form')
+const $messageFormInput = $messageForm.querySelector('input')
+const $messageFormButton = $messageForm.querySelector('button')
+
 socket.on('welcome', (welcomeMessage) => {
     console.log(welcomeMessage)
 })
@@ -8,10 +14,17 @@ socket.on('message', (message) => {
     console.log(`${message}`)
 })
 
-document.querySelector('#send').addEventListener('click', (e) => {
+$messageFormButton.addEventListener('click', (e) => {
     e.preventDefault()
+
+    $messageFormButton.setAttribute('disabled', 'disabled')
+
     const message = document.getElementById('message').value
     socket.emit('sendMessage', message, (error) => {
+        $messageFormButton.removeAttribute('disabled')
+        $messageFormInput.value = ''
+        $messageFormInput.focus()
+
         if (error) {
             return console.log(error)
         }
