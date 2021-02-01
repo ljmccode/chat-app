@@ -19,10 +19,19 @@
     </form>
     <button id="send-location">Send location</button>
     <p id="loading-location">Sending location...</p>
+    <a href=""></a>
 
     <script id="message-template" type="text/html">
         <div>
             <p>{{message}}</p>
+        </div>
+    </script>
+
+    <script id="location-template" type="text/html">
+        <div>
+            <p>
+                <a href="{{locationURL}}" target="_blank">My current location</a>
+            </p>
         </div>
     </script>
 
