@@ -65,7 +65,7 @@ $sendLocationButton.addEventListener('click', () => {
     navigator.geolocation.getCurrentPosition((position) => {
         socket.emit('sendLocation', {
             lat: position.coords.latitude,
-            long: position.coords.longitude
+            long: position.coords.longitude 
         }, () => {
             $sendLocationButton.removeAttribute('disabled')
             $loadLocation.style.display = 'none'
@@ -74,4 +74,9 @@ $sendLocationButton.addEventListener('click', () => {
     })
 })
 
-socket.emit('join', { username, room })
+socket.emit('join', { username, room }, (error) => {
+    if (error) {
+        alert(error)
+        location.href ='/'
+    }
+})
