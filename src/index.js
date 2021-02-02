@@ -31,6 +31,10 @@ io.on('connection', (socket) => {
     
         // sends to everybody but this particular socket
         socket.broadcast.to(user.room).emit('message', generateMessage('Admin', `${user.username} has joined the chat`))
+        io.to(user.room).emit('roomData', {
+            room: user.room,
+            users: getUsersInRoom(user.room)
+        })
 
         callback()
     })
@@ -65,6 +69,10 @@ io.on('connection', (socket) => {
         const user = removeUser(socket.id)
         if (user) {
             io.to(user.room).emit('message', generateMessage('Admin', `${user.username} has left the room`))
+            io.to(user.room).emi('roomData', {
+                room: user.room,
+                users: getUsersInRoom(user.room)
+            })
         }
     })
 })
