@@ -17,10 +17,16 @@ app.use(express.json())
 app.use(express.static(publicDirectoryPath))
 
 io.on('connection', (socket) => {
-    socket.emit('message', generateMessage('Welcome!'))
+
+    socket.on('join', ({ username, room }) => {
+        socket.join(room)
+
+        socket.emit('message', generateMessage('Welcome!'))
     
-    // sends to everybody but this particular socket
-    socket.broadcast.emit('message', generateMessage('A new user has joined'))
+        // sends to everybody but this particular socket
+        socket.broadcast.to(room).emit('message', generateMessage(`${username} has joined the chat`))
+
+    })
      
     socket.on('sendMessage', (message, callback) => {
         const filter = new Filter()
@@ -28,9 +34,8 @@ io.on('connection', (socket) => {
         if (filter.isProfane(message)) {
             return callback('Profanity is not allowed')
         }
-        // emit the event to every single connection available
-        io.emit('message', generateMessage(message))
-        // can send data back
+        // emit the event to appropriate room
+        io.to('Hungry').emit('message', generateMessage(message))
         callback()
     })
 
