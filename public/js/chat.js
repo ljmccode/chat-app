@@ -12,13 +12,10 @@ const $messages = document.querySelector('#messages')
 // Templates
 const messageTemplate = document.querySelector('#message-template').innerHTML
 const locationTemplate = document.querySelector('#location-template').innerHTML
+const sidebarTemplate = document.querySelector('#sidebar-template').innerHTML
 
 // Options
 const { username, room } = Qs.parse(location.search, { ignoreQueryPrefix: true })
-
-socket.on('welcome', welcomeMessage => {
-    console.log(welcomeMessage)
-})
 
 socket.on('message', (message) => {
     // the message-template in our html will render the message parameter we receive
@@ -40,8 +37,11 @@ socket.on('locationMessage', (message) => {
 })
 
 socket.on('roomData', ({ room, users }) => {
-    console.log(room)
-    console.log(users)
+    const html = Mustache.render(sidebarTemplate, {
+        room,
+        users
+    })
+    document.getElementById('sidebar').innerHTML = html
 })
 
 $messageFormButton.addEventListener('click', (e) => {
