@@ -21,7 +21,8 @@
             <div class="compose">
                 <form id="message-form">
                     <input name="message" placeholder="Message" id="message" type="text" required>
-                    <button id="send">Send</button>
+                    <audio id="audio" src="http://mproud.com/wesnoth/trunk/sounds/receive.wav" autoplay="false"></audio>
+                    <button id="send" onclick="playSound()">Send</button>
                 </form>
                 <button id="send-location">Send location</button>
                 <p class="loading-location">Sending location...</p>
@@ -58,7 +59,12 @@
             {{/users}}
         </ul>
     </script>
-
+    <script>
+    function playSound () {
+            document.getElementById('audio').play();
+        }
+    </script>
+    
     <!-- Client-side version of the socketio library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
