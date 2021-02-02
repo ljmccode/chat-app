@@ -6,7 +6,7 @@ const $messageForm = document.querySelector('#message-form')
 const $messageFormInput = $messageForm.querySelector('input')
 const $messageFormButton = $messageForm.querySelector('button')
 const $sendLocationButton = document.querySelector('#send-location')
-const $loadLocation = document.querySelector('#loading-location')
+const $loadLocation = document.querySelector('.loading-location')
 const $messages = document.querySelector('#messages')
 
 // Templates
@@ -23,6 +23,7 @@ socket.on('welcome', welcomeMessage => {
 socket.on('message', (message) => {
     // the message-template in our html will render the message parameter we receive
     const html = Mustache.render(messageTemplate, {
+        username: message.username,
         message: message.text,
         createdAt: moment(message.createdAt).format('h:mm:ss a')
     })
@@ -31,6 +32,7 @@ socket.on('message', (message) => {
 
 socket.on('locationMessage', (message) => {
     const html = Mustache.render(locationTemplate, {
+        username: message.username,
         locationURL: message.url,
         createdAt: moment(message.createdAt).format('h:mm:ss a')
     })

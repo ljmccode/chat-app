@@ -1,8 +1,8 @@
 const users = []
 
 const addUser = ( {id, username, room} ) => {
-    username = username.trim().toLowerCase()
-    room = room.trim().toLowerCase()
+    username = username.trim()
+    room = room.trim()
 
     if (!username || !room) {
         return {
@@ -11,7 +11,7 @@ const addUser = ( {id, username, room} ) => {
     }
 
     const userExists = users.find((user) => {
-        return user.username === username && user.room === room
+        return user.username.toLowerCase() === username.toLowerCase() && user.room.toLowerCase() === room.toLowerCase()
     })
 
     if(userExists) {
@@ -47,3 +47,4 @@ module.exports = {
     getUser,
     getUsersInRoom
 }
+
