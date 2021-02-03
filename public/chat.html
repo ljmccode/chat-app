@@ -13,7 +13,7 @@
     
     <div class="chat">
         <div id="sidebar" class="chat__sidebar">
-            <h1>Meower 🐾</h1>
+            <!-- <h1>Meower 🐾</h1> -->
         </div>
         <div class="chat__main">
             <div id="messages" class="chat__messages"></div>
@@ -22,10 +22,13 @@
                 <form id="message-form">
                     <input name="message" placeholder="Message" id="message" type="text" required>
                     <audio id="audio" src="http://mproud.com/wesnoth/trunk/sounds/receive.wav" autoplay="false"></audio>
-                    <button id="send" onclick="playSound()">Send</button>
+                    <div id="compose-buttons">
+                        <button id="send" onclick="playSound()">Send</button>
+                        <button id="send-location">Send location</button>
+                        <p class="loading-location">Sending location...</p>
+                    </div>
                 </form>
-                <button id="send-location">Send location</button>
-                <p class="loading-location">Sending location...</p>
+                
             </div>
         </div>
     </div>

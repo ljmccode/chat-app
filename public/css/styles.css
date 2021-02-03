@@ -45,6 +45,7 @@ button {
     color: white;
     font-size: 16px;
     transition: background .3s ease;
+    margin: 4px;
 }
 
 button:hover {
@@ -55,6 +56,7 @@ button:disabled {
     cursor: default;
     background: #7c5cbf94;
 }
+
 
 /* Join Page Styles */
 
@@ -164,6 +166,10 @@ button:disabled {
     font-size: 14px;
 }
 
+#compose-buttons {
+    display: flex;
+}
+
 /* Chat Sidebar Styles */
 
 .room-title {
@@ -174,10 +180,12 @@ button:disabled {
 }
 
 .list-title {
-    font-weight: 500;
+    color: #7C5CBF;
+    font-weight: bold;
     font-size: 18px;
     margin-bottom: 4px;
     padding: 12px 24px 0 24px;
+    overflow-x: hidden;
 }
 
 .users {
@@ -186,3 +194,38 @@ button:disabled {
     padding: 12px 24px 0 24px;
 }
 
+/* -------------------  PHONE  --------------------- */
+
+@media screen and (max-width: 400px) {
+    
+}
+
+/* -------------------  TABLET  --------------------- */
+@media (max-width: 768px) {
+    .chat__sidebar {
+        width: 100px;
+    }
+    .room-title {
+        font-size: 20px
+    }
+
+    .list-title{
+        font-size: 16px
+    }
+    .list {
+        font-size: 12px
+    }
+    .compose form{
+        display: block;
+    }
+    #compose-buttons {
+        display: block;
+        margin: 0 auto;
+        text-align: center;
+        margin-top: 5px;
+    }
+
+    .chat__sidebar {
+        width: 100px;
+    }
+}
