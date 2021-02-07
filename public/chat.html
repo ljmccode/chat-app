@@ -6,14 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="/img/favicon.png">
     <link rel="stylesheet" href="/./css/styles.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+    />
     <title>Meower</title>
 </head>
 
 <body>
-    
+    <nav id="navbar">
+        <div class="nav-header">
+            <h1>Meower 🐾</h1>
+            <button class="nav-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <div class="nav-dropdown show-nav">
+
+        </div>
+    </nav>
     <div class="chat">
         <div id="sidebar" class="chat__sidebar">
-            <!-- <h1>Meower 🐾</h1> -->
         </div>
         <div class="chat__main">
             <div id="messages" class="chat__messages"></div>
@@ -57,6 +70,16 @@
         <h2 class="room-title">{{room}}</h2>
         <h3 class="list-title">Users</h3>
         <ul class='users'>
+            {{#users}}
+                <li>{{username}}</li>
+            {{/users}}
+        </ul>
+    </script>
+
+    <script id="navbar-template" type="text/html">
+        <h3 class="nav-room nav-info">{{room}}</h3>
+        <h2 class="nav-list nav-info">Users</h2>
+        <ul class='nav-users nav-info'>
             {{#users}}
                 <li>{{username}}</li>
             {{/users}}
