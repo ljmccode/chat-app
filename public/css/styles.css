@@ -258,9 +258,6 @@ nav {
 }
 
 /* -------------------  TABLET  --------------------- */
-@meadi (min-width: 400px) {
-
-}
 @media (max-width: 768px) {
     .chat__sidebar {
         width: 100px;
