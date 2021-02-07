@@ -8,11 +8,13 @@ const $messageFormButton = $messageForm.querySelector('button')
 const $sendLocationButton = document.querySelector('#send-location')
 const $loadLocation = document.querySelector('.loading-location')
 const $messages = document.querySelector('#messages')
+const $navToggle = document.querySelector('.nav-toggle')
 
 // Templates
 const messageTemplate = document.querySelector('#message-template').innerHTML
 const locationTemplate = document.querySelector('#location-template').innerHTML
 const sidebarTemplate = document.querySelector('#sidebar-template').innerHTML
+const navbarTemplate = document.querySelector('#navbar-template').innerHTML
 
 // Options
 const { username, room } = Qs.parse(location.search, { ignoreQueryPrefix: true })
@@ -69,6 +71,12 @@ socket.on('roomData', ({ room, users }) => {
         users
     })
     document.getElementById('sidebar').innerHTML = html
+
+    const navHtml = Mustache.render(navbarTemplate, {
+        room,
+        users
+    })
+    document.querySelector('.nav-dropdown').innerHTML = navHtml
 })
 
 $messageFormButton.addEventListener('click', (e) => {
@@ -107,6 +115,10 @@ $sendLocationButton.addEventListener('click', () => {
         })
     })
 })
+
+$navToggle.addEventListener("click", function () {
+    document.querySelector('.nav-dropdown').classList.toggle("show-nav");
+  });
 
 socket.emit('join', { username, room }, (error) => {
     if (error) {
