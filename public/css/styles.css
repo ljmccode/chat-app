@@ -57,6 +57,57 @@ button:disabled {
     background: #7c5cbf94;
 }
 
+/* Navbar */
+nav {
+    background: #12bfbfe0;
+}
+
+.nav-header{ 
+    color: black;
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav-header h1 {
+    margin:10px;
+}
+
+.nav-toggle {
+    color: white;
+    visibility: hidden;
+}
+
+.nav-info {
+    text-align: right;
+    color: white;
+    cursor:pointer;
+}
+
+.nav-room {
+    font-size: 20px;
+    margin: 10px;
+    color: #9D85D1;
+}
+
+.nav-list {
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+.nav-users {
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+.nav-dropdown {
+    background-color: #2C303A;
+    padding-bottom: 10px;
+    display: none;
+}
+
+.show-nav {
+    display: block
+}
 
 /* Join Page Styles */
 
@@ -94,9 +145,9 @@ button:disabled {
 .chat__sidebar {
     height: 100vh;
     color: white;
-    background:#12bfbfe0;
+    background:#2c2f3a;
     width: 225px;
-    overflow-y: scroll
+    overflow-y: scroll;
 }
 
 /* Chat styles */
@@ -176,11 +227,12 @@ button:disabled {
     font-weight: 400;
     font-size: 22px;
     background: #2c2f3a;
-    padding: 24px;   
+    padding: 24px;  
+    color: #9d85d1;
 }
 
 .list-title {
-    color: #7C5CBF;
+    color: white;
     font-weight: bold;
     font-size: 18px;
     margin-bottom: 4px;
@@ -197,10 +249,18 @@ button:disabled {
 /* -------------------  PHONE  --------------------- */
 
 @media screen and (max-width: 400px) {
-    
+    .chat__sidebar {
+        display: none;
+    }
+    .nav-toggle {
+        visibility: visible;
+    }
 }
 
 /* -------------------  TABLET  --------------------- */
+@meadi (min-width: 400px) {
+
+}
 @media (max-width: 768px) {
     .chat__sidebar {
         width: 100px;
